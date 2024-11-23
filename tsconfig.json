@@ -13,15 +13,36 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "baseUrl": "src/",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/utils/*": ["utils/*"],
+      "@/lib/*": ["lib/*"],
+      "@/ui/*": ["components/ui/*"],
+      "@/constants/*": ["constants/*"],
+      "@/components/*": ["components/*"],
+      "@/context/*": ["context/*"],
+      "@/common/*": ["common/*"],
+      "@/pages/*": ["app/*"],
+      "@/services/*": ["services/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/public/*": ["./public/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["types/*"],
+      "@/providers/*": ["providers/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/(dashboard)/profile/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }
