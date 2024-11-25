@@ -55,6 +55,6 @@ export const postSchema = yup
       .typeError(errorMessages.typeError)
       .required(errorMessages.required("زمان مطالعه")),
     category: yup.string().required(errorMessages.required("دسته بندی")),
-    coverImage: yup.string().required(errorMessages.required("کاور پست")),
+    coverImage: yup.mixed().required(errorMessages.required("کاور پست")),
   })
   .required();

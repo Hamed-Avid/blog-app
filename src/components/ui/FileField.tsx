@@ -8,7 +8,6 @@ type FileFieldProps<T extends FieldValues> = {
   value: string | number | readonly string[] | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
-  className?: string;
   errors?: FieldErrors<T>;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -19,7 +18,6 @@ export default function FileField<T extends FieldValues>({
   errors,
   dir = "rtl",
   onChange,
-  className,
   isRequired = false,
   ...rest
 }: FileFieldProps<T>) {
@@ -27,21 +25,21 @@ export default function FileField<T extends FieldValues>({
     <div className="textField">
       <label
         htmlFor="file-upload"
-        className={`flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-primary-900 px-3 py-2 text-primary-900 ${className}`}
+        className={`flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 px-3 py-2 text-primary-900 ${errors && errors[name] ? "border-error" : "border-primary-900"}`}
       >
         {label} {isRequired && <span className="text-error">*</span>}
         <ArrowUpTrayIcon className="size-5" />
-        <input
-          id="file-upload"
-          type="file"
-          className="sr-only"
-          name={name}
-          dir={dir}
-          value={value}
-          onChange={(e) => onChange(e)}
-          {...rest}
-        />
       </label>
+      <input
+        id="file-upload"
+        type="file"
+        className="sr-only hidden"
+        name={name}
+        dir={dir}
+        value={value}
+        onChange={(e) => onChange(e)}
+        {...rest}
+      />
       {errors && errors[name] && (
         <span className="mt-2 block text-xs text-red-600">
           {(errors[name] as FieldError).message}

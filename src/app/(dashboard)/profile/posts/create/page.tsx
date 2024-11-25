@@ -1,16 +1,16 @@
 import Breadcrumbs from "@/ui/Breadcrumbs";
-import CreatePostForm from "../_components/CreatePostForm";
+import PostForm from "../_components/PostForm";
 
-export default function CreatePost() {
+export default async function CreatePost() {
   return (
-    <div>
+    <>
       <Breadcrumbs
         breadcrumbs={[
           { label: "پست ها", href: "/profile/posts" },
           { label: "ایجاد پست", href: "/profile/posts/create", active: true },
         ]}
       />
-      <CreatePostForm />
-    </div>
+      <PostForm />
+    </>
   );
 }

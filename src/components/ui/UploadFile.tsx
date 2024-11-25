@@ -19,6 +19,7 @@ type UploadFileProps<T extends FieldValues> = {
   errors?: FieldErrors<T>;
   errorMessage?: string;
   isRequired?: boolean;
+  prevCoverImageUrl?: string;
 };
 
 export default function UploadFile<T extends FieldValues>({
@@ -28,8 +29,11 @@ export default function UploadFile<T extends FieldValues>({
   errors,
   errorMessage,
   isRequired = false,
+  prevCoverImageUrl,
 }: UploadFileProps<T>) {
-  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
+  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(
+    prevCoverImageUrl || null,
+  );
 
   const addHandler = (
     e: React.ChangeEvent<HTMLInputElement>,

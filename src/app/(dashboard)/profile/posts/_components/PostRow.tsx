@@ -40,7 +40,7 @@ export default function PostRow({ post, index }: PostRowProps) {
       <td>
         <div className="flex items-center gap-3">
           <UpdatePost postId={_id} />
-          <DeletePost postId={_id} />
+          <DeletePost postId={_id} title={title}/>
         </div>
       </td>
     </Table.Row>

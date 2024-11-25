@@ -34,7 +34,7 @@ export default function SelectField<T extends FieldValues>({
       <select
         id={name}
         {...register(name)}
-        className="textField__input"
+        className={`textField__input ${errors && errors[name] ? "border-error" : ""}`}
         {...rest}
       >
         <option value="">

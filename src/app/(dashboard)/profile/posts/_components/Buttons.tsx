@@ -1,22 +1,54 @@
 "use client";
 
+import { useDeletePost } from "@/hooks/usePosts";
 import ButtonIcon from "@/ui/ButtonIcon";
+import ConfirmDelete from "@/ui/ConfirmDelete";
+import Modal from "@/ui/Modal";
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-type ButtonProps = { postId: string };
+type ButtonProps = { postId: string; title: string };
 
-export function DeletePost({ postId }: ButtonProps) {
+export function DeletePost({ postId, title }: ButtonProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { isDeleting, deletePostAsync } = useDeletePost();
+
+  const toggleHandler = () => setIsOpen(!isOpen);
+  const router = useRouter();
+
   return (
-    <ButtonIcon variant="outline" onClick={() => console.log(postId)}>
-      <TrashIcon className="stroke-error" />
-    </ButtonIcon>
+    <>
+      <ButtonIcon variant="outline" onClick={toggleHandler}>
+        <TrashIcon className="stroke-error" />
+      </ButtonIcon>
+      <Modal title={`حدف ${title}`} isOpen={isOpen} onClose={toggleHandler}>
+        <ConfirmDelete
+          resourceName={title}
+          onClose={toggleHandler}
+          disabled={isDeleting}
+          onConfirm={(e) => {
+            e.preventDefault();
+            deletePostAsync(
+              { postId },
+              {
+                onSuccess: () => {
+                  toggleHandler();
+                  router.refresh();
+                },
+              },
+            );
+          }}
+        />
+      </Modal>
+    </>
   );
 }
 
-export function UpdatePost({ postId }: ButtonProps) {
+export function UpdatePost({ postId }: Omit<ButtonProps, "title">) {
   return (
-    <Link href={`/profile/posts/${postId}/edit`}>
+    <Link href={`/profile/posts/${postId}/update`}>
       <ButtonIcon variant="outline">
         <PencilIcon className="stroke-warning" />
       </ButtonIcon>
