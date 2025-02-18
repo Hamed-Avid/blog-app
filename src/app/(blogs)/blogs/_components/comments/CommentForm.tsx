@@ -43,9 +43,7 @@ export default function CommentForm({
         <div className="w-full max-w-md">
           <form
             className="space-y-7"
-            action={async (formData) =>
-              await formAction({ formData, postId, parentId })
-            }
+            action={(formData) => formAction({ formData, postId, parentId })}
           >
             <TextAreaFiled
               name="text"

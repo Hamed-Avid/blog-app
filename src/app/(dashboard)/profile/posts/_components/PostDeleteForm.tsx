@@ -36,14 +36,10 @@ export default function PostDeleteForm({
     if (state?.error) {
       toast.error(state.error);
     }
-  }, [state, onclose]);
+  }, [state, onClose]);
 
   return (
-    <form
-      action={async () => {
-        await formAction({postId});
-      }}
-    >
+    <form action={() => formAction({ postId })}>
       <div className="flex items-center justify-between gap-x-16">
         <Button
           className="flex-1"

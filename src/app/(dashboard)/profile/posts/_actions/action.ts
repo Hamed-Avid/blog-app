@@ -1,6 +1,5 @@
 "use server";
 
-import { createCommentApi } from "@/services/commentService";
 import { deletePostApi } from "@/services/postService";
 import type { CustomError } from "@/types/Api";
 import setCookieOnRequest from "@/utils/setCookieOnRequest";
