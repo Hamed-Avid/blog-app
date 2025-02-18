@@ -22,7 +22,10 @@ export default function CommentForm({
   onClose,
 }: CommentFormProps) {
   const [text, setText] = useState("");
-  const [state, formAction] = useActionState(createCommentAction, initialState);
+  const [state, formAction, pending] = useActionState(
+    createCommentAction,
+    initialState,
+  );
 
   useEffect(() => {
     if (state?.message) {
@@ -52,7 +55,7 @@ export default function CommentForm({
               onChange={(e) => setText(e.target.value)}
             />
 
-            <SubmitButton type="submit" className="w-full">
+            <SubmitButton type="submit" className="w-full" disabled={pending}>
               {parentId ? "ثبت پاسخ" : "ثبت نظر"}
             </SubmitButton>
           </form>

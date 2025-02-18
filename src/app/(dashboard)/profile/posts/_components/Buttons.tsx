@@ -1,22 +1,18 @@
 "use client";
 
-import { useDeletePost } from "@/hooks/usePosts";
 import ButtonIcon from "@/ui/ButtonIcon";
-import ConfirmDelete from "@/ui/ConfirmDelete";
 import Modal from "@/ui/Modal";
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import PostDeleteForm from "./PostDeleteForm";
 
 type ButtonProps = { postId: string; title: string };
 
 export function DeletePost({ postId, title }: ButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { isDeleting, deletePostAsync } = useDeletePost();
 
   const toggleHandler = () => setIsOpen(!isOpen);
-  const router = useRouter();
 
   return (
     <>
@@ -24,23 +20,10 @@ export function DeletePost({ postId, title }: ButtonProps) {
         <TrashIcon className="stroke-error" />
       </ButtonIcon>
       <Modal title={`حدف ${title}`} isOpen={isOpen} onClose={toggleHandler}>
-        <ConfirmDelete
-          resourceName={title}
-          onClose={toggleHandler}
-          disabled={isDeleting}
-          onConfirm={(e) => {
-            e.preventDefault();
-            deletePostAsync(
-              { postId },
-              {
-                onSuccess: () => {
-                  toggleHandler();
-                  router.refresh();
-                },
-              },
-            );
-          }}
-        />
+        <h2 className="mb-8 text-base font-bold text-secondary-700">
+          آیا از حذف {title} مطمین هستید؟
+        </h2>
+        <PostDeleteForm onClose={toggleHandler} postId={postId} />
       </Modal>
     </>
   );

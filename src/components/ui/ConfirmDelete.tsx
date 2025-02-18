@@ -1,5 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Button from "./Button";
+import SubmitButton from "./SubmitButton";
 
 type ConfirmDeleteProps = {
   resourceName: string;
@@ -29,15 +30,15 @@ export default function ConfirmDelete({
           >
             لغو
           </Button>
-          <Button
+          <SubmitButton
             type="submit"
-            disabled={disabled}
             variant="danger"
+            disabled={disabled}
             className="flex flex-1 items-center justify-center gap-x-2"
           >
-            <TrashIcon className="w-5" />
+            <TrashIcon className="size-5" />
             <span>حذف</span>
-          </Button>
+          </SubmitButton>
         </div>
       </form>
     </div>
